@@ -47,8 +47,7 @@ export default function About() {
           <div style={{ flex: '1 1 420px', minWidth: 0 }}>
             <h1 style={display}>Kevin Raval</h1>
             <p style={standfirst}>
-              AI software engineer. I build systems that call models, and then I find out what
-              happens at 3am.
+              AI Software Engineer. I work on distributed systems and Agentic AI applications.
             </p>
           </div>
           <div style={{ display: 'grid', gap: 12, fontSize: 15, lineHeight: '26px', flex: '0 1 260px' }}>
@@ -80,9 +79,7 @@ export default function About() {
             the design, the failure, and the correction, in that order.
           </p>
           <p style={column}>
-            Alongside that I am working through distributed systems properly — Raft, consensus,
-            backpressure, exactly-once as a marketing term. Writing it down is how I find the gaps.
-            If a post reads like a lecture, assume I got it wrong in production first.
+            Alongside that I am working through distributed systems. Learning and finding solutions on secure, scalable, reliable and observable systems. 
           </p>
           <p style={column}>
             This site is my notebook kept in public. Nothing here is authoritative; it is a record
@@ -96,34 +93,15 @@ export default function About() {
             What I work with
           </span>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 18 }}>
-            <span className="tag tag-outline">LLM applications</span>
-            <span className="tag tag-outline">Retrieval &amp; evals</span>
             <span className="tag tag-outline">Python</span>
-            <span className="tag tag-outline">Go</span>
-            <span className="tag tag-outline">Postgres · pgvector</span>
+            <span className="tag tag-outline">FastAPI</span>
+            <span className="tag tag-outline">LLM applications</span>
+            <span className="tag tag-outline">RAG, Multi-Agent Orchestrator &amp; evals</span>
+            <span className="tag tag-outline">Postgres</span>
             <span className="tag tag-outline">Kafka</span>
             <span className="tag tag-outline">Kubernetes</span>
             <span className="tag tag-outline">Observability</span>
-          </div>
-        </section>
-
-        <section style={{ padding: '64px 0 0', maxWidth: '70ch' }}>
-          <span className="kicker kicker--65" style={{ display: 'block' }}>
-            Currently
-          </span>
-          <div style={{ display: 'grid', gap: 20, marginTop: 20 }}>
-            <p style={currently}>
-              <strong>Learning:</strong> consensus and membership changes, the way replicated state
-              machines fail in the middle rather than at the edges.
-            </p>
-            <p style={currently}>
-              <strong>Building:</strong> an evaluation harness that scores answers against a rubric
-              instead of scoring retrieval against a label set.
-            </p>
-            <p style={currently}>
-              <strong>Reading:</strong> the Raft paper again, and everything Marc Brooker writes
-              about timeouts.
-            </p>
+            <span className="tag tag-outline">Redis</span>
           </div>
         </section>
 

@@ -96,7 +96,6 @@ function renderBody(blocks: Block[]) {
             letterSpacing: '-0.01em',
             maxWidth: '30ch',
             margin: '44px 0',
-            textIndent: '-0.475em',
           }}
         >
           {renderSpans(block.text, `quote-${i}`)}

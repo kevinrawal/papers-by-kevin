@@ -61,8 +61,8 @@ export default function Home() {
           dateline={
             <>
               <span>AI Software Engineer</span>
-              <span>Notes on models, systems &amp; incidents</span>
-              <span>Written as I learn</span>
+              <span>Notes on AI, systems &amp; incidents</span>
+              <span>Written as I learn &amp; grow</span>
               <span>{`No. ${posts.length} · ${issueDate()}`}</span>
             </>
           }
@@ -78,10 +78,8 @@ export default function Home() {
               maxWidth: '16ch',
             }}
           >
-            <span style={{ display: 'block' }}>Working notes on</span>
-            <span style={{ display: 'block' }}>AI and the systems</span>
-            <span style={{ display: 'block' }}>that carry it.</span>
-          </h1>
+            <span style={{ display: 'block' }}>Notes on</span>
+            <span style={{ display: 'block' }}>Software Engineering, AI and the systems.</span>          </h1>
           <p
             style={{
               fontSize: 17,
@@ -91,10 +89,7 @@ export default function Home() {
               color: 'color-mix(in srgb, var(--color-text) 80%, transparent)',
             }}
           >
-            I am learning distributed systems and building with language models, and I write down
-            what actually happened — the design that survived review, the incident that ate a
-            Saturday, the thing I misunderstood for six months. Kept here for my future self, open
-            to anyone else it helps.
+           I am learning and building distributed systems and Agentic AI applications. I write about my learnings and things I build.
           </p>
         </section>
 
@@ -234,7 +229,7 @@ export default function Home() {
             </a>
           </div>
           <p className="kicker kicker--55" style={{ margin: '56px 0 0' }}>
-            Kevin Raval — written in the open, corrected in public
+            Kevin Raval — A passionate software engineer.
           </p>
         </section>
       </div>

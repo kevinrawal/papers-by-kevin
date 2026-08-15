@@ -34,8 +34,6 @@ export default function Projects() {
         <section style={{ padding: '64px 0 40px' }}>
           <h1 style={display}>
             Things I built
-            <br />
-            to understand them
           </h1>
           <p
             style={{
@@ -46,8 +44,7 @@ export default function Projects() {
               color: 'color-mix(in srgb, var(--color-text) 80%, transparent)',
             }}
           >
-            Mostly small, mostly written twice. Each one started as a paper or an outage I did not
-            understand well enough to explain.
+            Mostly build with curiosity and Learning in mind. Some of these may be solving real problems, some are just experiments.
           </p>
         </section>
 
