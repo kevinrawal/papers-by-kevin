@@ -4,16 +4,13 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .config import get_settings
-from .database import Base, SessionLocal, engine
-from .routers import admin, auth, posts, projects
-from .seed import seed_if_empty
+from .database import Base, engine
+from .routers import auth, posts, projects
 
 
 @asynccontextmanager
 async def lifespan(_: FastAPI):
     Base.metadata.create_all(bind=engine)
-    with SessionLocal() as db:
-        seed_if_empty(db)
     yield
 
 
@@ -30,7 +27,6 @@ app.add_middleware(
 app.include_router(auth.router)
 app.include_router(posts.router)
 app.include_router(projects.router)
-app.include_router(admin.router)
 
 
 @app.get("/api/health")

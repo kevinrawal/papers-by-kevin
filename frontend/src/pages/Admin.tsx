@@ -81,18 +81,15 @@ export default function Admin() {
   const [projects, setProjects] = useState<Project[]>([])
   const [draft, setDraft] = useState<Draft | null>(null)
   const [confirmId, setConfirmId] = useState<string | null>(null)
-  const [resetArmed, setResetArmed] = useState(false)
   const [saved, setSaved] = useState('')
   const [error, setError] = useState('')
 
   const navigate = useNavigate()
   const savedTimer = useRef<number | undefined>(undefined)
-  const resetTimer = useRef<number | undefined>(undefined)
 
   useEffect(
     () => () => {
       window.clearTimeout(savedTimer.current)
-      window.clearTimeout(resetTimer.current)
     },
     [],
   )
@@ -203,27 +200,6 @@ export default function Admin() {
       setConfirmId(null)
       setDraft(null)
       flash('Entry spiked')
-    } catch (err) {
-      handle(err)
-    }
-  }
-
-  async function resetAll() {
-    if (!resetArmed) {
-      setResetArmed(true)
-      window.clearTimeout(resetTimer.current)
-      resetTimer.current = window.setTimeout(() => setResetArmed(false), 4000)
-      return
-    }
-    window.clearTimeout(resetTimer.current)
-    setResetArmed(false)
-    setError('')
-    try {
-      await api.reset()
-      await Promise.all([loadPosts(), loadProjects()])
-      setDraft(null)
-      setConfirmId(null)
-      flash('Reset to sample')
     } catch (err) {
       handle(err)
     }
@@ -647,13 +623,6 @@ export default function Admin() {
               <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                 <button type="button" className="btn btn-ghost" onClick={exportAll}>
                   Export JSON
-                </button>
-                <button
-                  type="button"
-                  className={resetArmed ? 'btn btn-primary' : 'btn btn-ghost'}
-                  onClick={() => void resetAll()}
-                >
-                  {resetArmed ? 'Confirm reset' : 'Reset to sample'}
                 </button>
                 <button
                   type="button"

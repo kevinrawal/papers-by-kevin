@@ -62,8 +62,3 @@ class LoginIn(BaseModel):
 class TokenOut(BaseModel):
     access_token: str
     token_type: str = "bearer"
-
-
-class ResetOut(BaseModel):
-    posts: int
-    projects: int

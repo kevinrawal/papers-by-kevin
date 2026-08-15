@@ -73,5 +73,4 @@ export const api = {
       body: JSON.stringify({ password }),
     }),
   me: () => request<{ admin: boolean }>('/api/auth/me'),
-  reset: () => request<{ posts: number; projects: number }>('/api/admin/reset', { method: 'POST' }),
 }
