@@ -27,8 +27,6 @@ const column: React.CSSProperties = {
   hyphens: 'auto',
 }
 
-const currently: React.CSSProperties = { fontSize: 16, lineHeight: '28px', margin: 0 }
-
 export default function About() {
   return (
     <div className="page">
