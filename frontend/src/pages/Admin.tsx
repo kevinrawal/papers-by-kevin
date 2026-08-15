@@ -493,7 +493,7 @@ export default function Admin() {
                     rows={14}
                     value={draft.value.body}
                     onChange={(e) => patchPost({ body: e.target.value })}
-                    placeholder="Plain paragraphs. ## for a heading, > for a pull quote, - for a list item."
+                    placeholder="Plain paragraphs. ## heading, > pull quote, - list item, --- rule. **bold** and [text](url) work inline."
                   />
                 </div>
                 <div className="field">

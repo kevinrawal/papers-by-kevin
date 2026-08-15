@@ -3,12 +3,118 @@ import { Link, useParams } from 'react-router-dom'
 
 import SiteHeader from '../components/SiteHeader'
 import { api } from '../lib/api'
-import { parseBody } from '../lib/parseBody'
+import { parseBody, parseInline } from '../lib/parseBody'
+import type { Block } from '../lib/parseBody'
 import type { Post } from '../lib/types'
 
 const body: React.CSSProperties = { fontSize: 17, lineHeight: '30px' }
 
 type Load = 'loading' | 'found' | 'missing'
+
+/** Renders a block's text as plain/bold/link runs — see parseInline. */
+function renderSpans(text: string, keyPrefix: string) {
+  return parseInline(text).map((span, i) => {
+    const key = `${keyPrefix}-${i}`
+    if (span.kind === 'bold') return <strong key={key}>{span.text}</strong>
+    if (span.kind === 'link') {
+      const external = /^https?:\/\//.test(span.href ?? '')
+      return (
+        <a
+          key={key}
+          href={span.href}
+          target={external ? '_blank' : undefined}
+          rel={external ? 'noreferrer' : undefined}
+          style={{ textDecoration: 'underline', textUnderlineOffset: 3 }}
+        >
+          {span.text}
+        </a>
+      )
+    }
+    return span.text
+  })
+}
+
+/** Groups consecutive `item` blocks into one <ul>, and turns `rule` blocks
+ *  into a divider — everything else renders one-for-one. */
+function renderBody(blocks: Block[]) {
+  const nodes: React.ReactNode[] = []
+  let i = 0
+  while (i < blocks.length) {
+    const block = blocks[i]
+
+    if (block.kind === 'item') {
+      const start = i
+      const items: Block[] = []
+      while (i < blocks.length && blocks[i].kind === 'item') {
+        items.push(blocks[i])
+        i++
+      }
+      nodes.push(
+        <ul key={`list-${start}`} style={{ listStyle: 'none', margin: '14px 0 0', padding: 0 }}>
+          {items.map((item, j) => (
+            <li
+              key={j}
+              style={{ ...body, margin: j === 0 ? 0 : '14px 0 0', paddingLeft: 24, textIndent: -24 }}
+            >
+              — {renderSpans(item.text, `item-${start}-${j}`)}
+            </li>
+          ))}
+        </ul>,
+      )
+      continue
+    }
+
+    if (block.kind === 'rule') {
+      nodes.push(<hr key={i} className="rule-divider" style={{ margin: '32px 0 0' }} />)
+      i++
+      continue
+    }
+
+    if (block.kind === 'head') {
+      nodes.push(
+        <h2
+          key={i}
+          style={{ fontSize: 26, lineHeight: 1.2, letterSpacing: '-0.015em', margin: '44px 0 0' }}
+        >
+          {renderSpans(block.text, `head-${i}`)}
+        </h2>,
+      )
+      i++
+      continue
+    }
+
+    if (block.kind === 'quote') {
+      nodes.push(
+        <blockquote
+          key={i}
+          className="heading-face"
+          style={{
+            fontStyle: 'italic',
+            fontWeight: 400,
+            fontSize: 26,
+            lineHeight: '38px',
+            letterSpacing: '-0.01em',
+            maxWidth: '30ch',
+            margin: '44px 0',
+            textIndent: '-0.475em',
+          }}
+        >
+          {renderSpans(block.text, `quote-${i}`)}
+        </blockquote>,
+      )
+      i++
+      continue
+    }
+
+    nodes.push(
+      <p key={i} style={{ ...body, margin: '18px 0 0' }}>
+        {renderSpans(block.text, `para-${i}`)}
+      </p>,
+    )
+    i++
+  }
+  return nodes
+}
 
 export default function Article() {
   const { id = '' } = useParams()
@@ -136,55 +242,7 @@ export default function Article() {
           }}
         >
           <div style={{ flex: '1 1 460px', minWidth: 0, maxWidth: '70ch' }}>
-            {blocks.map((block, i) => {
-              if (block.kind === 'head') {
-                return (
-                  <h2
-                    key={i}
-                    style={{
-                      fontSize: 26,
-                      lineHeight: 1.2,
-                      letterSpacing: '-0.015em',
-                      margin: '44px 0 0',
-                    }}
-                  >
-                    {block.text}
-                  </h2>
-                )
-              }
-              if (block.kind === 'quote') {
-                return (
-                  <blockquote
-                    key={i}
-                    className="heading-face"
-                    style={{
-                      fontStyle: 'italic',
-                      fontWeight: 400,
-                      fontSize: 26,
-                      lineHeight: '38px',
-                      letterSpacing: '-0.01em',
-                      maxWidth: '30ch',
-                      margin: '44px 0',
-                      textIndent: '-0.475em',
-                    }}
-                  >
-                    {block.text}
-                  </blockquote>
-                )
-              }
-              if (block.kind === 'item') {
-                return (
-                  <p key={i} style={{ ...body, margin: '14px 0 0', paddingLeft: 24, textIndent: -24 }}>
-                    — {block.text}
-                  </p>
-                )
-              }
-              return (
-                <p key={i} style={{ ...body, margin: '18px 0 0' }}>
-                  {block.text}
-                </p>
-              )
-            })}
+            {renderBody(blocks)}
 
             <hr className="rule-hair" style={{ margin: '56px 0 0' }} />
             <p
@@ -218,7 +276,7 @@ export default function Article() {
             <div style={{ display: 'grid', gap: 8, marginTop: 16 }}>
               {headings.map((heading, i) => (
                 <span key={i} style={{ color: 'color-mix(in srgb, var(--color-text) 80%, transparent)' }}>
-                  {heading.text}
+                  {renderSpans(heading.text, `toc-${i}`)}
                 </span>
               ))}
             </div>
