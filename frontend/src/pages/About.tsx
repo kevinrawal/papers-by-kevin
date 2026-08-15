@@ -77,7 +77,7 @@ export default function About() {
             the design, the failure, and the correction, in that order.
           </p>
           <p style={column}>
-            Alongside that I am working through distributed systems. Learning and finding solutions on secure, scalable, reliable and observable systems. 
+            Alongside that I am working through distributed systems, Learning and finding solutions on secure, scalable, reliable and observable systems. 
           </p>
           <p style={column}>
             This site is my notebook kept in public. Nothing here is authoritative; it is a record

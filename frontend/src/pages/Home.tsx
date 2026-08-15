@@ -78,8 +78,8 @@ export default function Home() {
               maxWidth: '16ch',
             }}
           >
-            <span style={{ display: 'block' }}>Notes on</span>
-            <span style={{ display: 'block' }}>Software Engineering, AI and the systems.</span>          </h1>
+            <span style={{ display: 'block' }}>Papers By Kevin</span>
+          </h1>
           <p
             style={{
               fontSize: 17,
