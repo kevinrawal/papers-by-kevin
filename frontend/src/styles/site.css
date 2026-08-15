@@ -1,0 +1,174 @@
+/* Page-level chrome for this site, layered on top of the Broadsheet system.
+   Everything here is either (a) the per-page <style> block the design pages
+   carry in their <helmet>, or (b) a style repeated often enough across the
+   pages that inlining it eight times would be noise.
+
+   Loaded after broadsheet.css, so equal-specificity rules here win. */
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  text-wrap: pretty;
+}
+
+/* The design sets links to inherit ink and drop their underline, then tints
+   them on hover. `:not(.btn)` keeps that away from button-shaped links, whose
+   own variant colors already carry the hover state. */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:not(.btn):hover {
+  color: var(--color-accent-700);
+}
+
+textarea.input {
+  font-family: var(--font-body);
+  resize: vertical;
+}
+
+/* Buttons wearing .tag (Home's filter chips) need the UA button skin removed —
+   the system styles .tag for inline spans. */
+button.tag {
+  border: 0;
+  background: transparent;
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+button.tag-accent {
+  background: var(--color-accent-100);
+  color: var(--color-accent-800);
+}
+button.tag-outline {
+  border: 1px solid var(--color-accent);
+}
+
+/* — the sheet — */
+
+.page {
+  min-height: 100vh;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 28px;
+  padding: 0 clamp(20px, 5vw, 72px);
+}
+/* The desk runs wider and to a tighter gutter than the reading pages. */
+.page--desk {
+  padding: 0 clamp(20px, 4vw, 56px);
+}
+
+.shell {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.shell--desk {
+  max-width: 1280px;
+}
+
+/* The display face on something that is not an h1–h4 — a standfirst, a pull
+   quote, an entry number. Headings get it from broadsheet.css already. */
+.heading-face {
+  font-family: var(--font-heading);
+  font-weight: var(--font-heading-weight);
+}
+
+/* — the uppercase label, the most repeated thing on the site — */
+
+.kicker {
+  font-size: 12.5px;
+  line-height: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.kicker--accent {
+  color: var(--color-accent-700);
+}
+.kicker--55 {
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+}
+.kicker--60 {
+  color: color-mix(in srgb, var(--color-text) 60%, transparent);
+}
+.kicker--65 {
+  color: color-mix(in srgb, var(--color-text) 65%, transparent);
+}
+.kicker--70 {
+  color: color-mix(in srgb, var(--color-text) 70%, transparent);
+}
+
+/* — press furniture: the masthead's thick-thin pair, and the hairlines — */
+
+.rule-heavy {
+  height: 5px;
+  border: 0;
+  margin: 14px 0 0;
+  border-top: 2px solid var(--color-text);
+  border-bottom: 1px solid var(--color-text);
+}
+.rule-hair {
+  height: 0;
+  border: 0;
+  border-top: 1px solid var(--color-text);
+  margin: 0;
+}
+.rule-divider {
+  height: 0;
+  border: 0;
+  border-top: 1px solid var(--color-divider);
+  margin: 0;
+}
+
+/* — masthead — */
+
+.masthead {
+  padding: 36px 0 0;
+}
+.masthead-row {
+  display: flex;
+  align-items: baseline;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.brand {
+  font-family: var(--font-heading);
+  font-weight: var(--font-heading-weight);
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  margin-right: auto;
+}
+.site-nav {
+  display: flex;
+  gap: 24px;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.site-nav a[aria-current='page'] {
+  color: var(--color-accent-700);
+}
+
+/* The dateline rail under the masthead rule. */
+.dateline {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px 28px;
+  padding: 12px 0;
+  color: color-mix(in srgb, var(--color-text) 70%, transparent);
+}
+
+/* — Home's entry list — */
+
+.entry {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: 0 24px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--color-divider);
+}
+.entry:hover {
+  background: color-mix(in srgb, var(--color-accent) 5%, transparent);
+}

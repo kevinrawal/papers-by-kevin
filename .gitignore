@@ -1,0 +1,20 @@
+# python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# secrets and local data
+.env
+*.db
+
+# node
+node_modules/
+dist/
+
+# editors / os
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
