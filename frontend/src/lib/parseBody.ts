@@ -1,8 +1,12 @@
 /** The article body format, ported from the design's Article.dc.html.
  *
  *  Blocks are separated by a blank line:
- *    `## ` a heading   `> ` a pull quote   `- ` a list item   `---` a rule
- *    otherwise a paragraph
+ *    `#` through `######` a heading   `> ` a pull quote   `- ` a list item
+ *    `---` a rule   otherwise a paragraph
+ *
+ *  The body only has one heading style — the page's own <h1> is the
+ *  separately-entered Headline field, not part of this text — so any run of
+ *  1-6 `#`s collapses to that same heading block, whatever depth was typed.
  *
  *  A run of `- ` lines that shares one block is expanded into an item each, so
  *  a list typed without blank lines between its items still reads as a list.
@@ -25,7 +29,8 @@ function parse(body: string): Block[] {
     .split(/\n\s*\n/)
     .map((raw): Block => {
       const t = raw.trim()
-      if (t.startsWith('## ')) return { kind: 'head', text: t.slice(3) }
+      const head = t.match(/^#{1,6} +/)
+      if (head) return { kind: 'head', text: t.slice(head[0].length) }
       if (t.startsWith('> ')) return { kind: 'quote', text: t.slice(2) }
       if (t.startsWith('- ')) return { kind: 'item', text: t.slice(2) }
       if (/^-{3,}$/.test(t)) return { kind: 'rule', text: '' }
