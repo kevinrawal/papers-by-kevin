@@ -23,6 +23,52 @@ a:not(.btn):hover {
   color: var(--color-accent-700);
 }
 
+/* — dark mode —
+   broadsheet.css only ships the light tokens (it's vendored — see that
+   file's header), so the night edition is defined here instead, reusing
+   the design system's own tonal ramp rather than inventing new colors:
+   dark bg/text is light mode's text/bg swapped, dark surface is the
+   neutral-900 step, and the accent steps move to their lighter rungs so
+   they still carry the "darker on hover/emphasis" relationship in
+   reverse. --color-divider is re-derived because broadsheet.css bakes
+   its light ink color into the mix rather than reading --color-text.
+
+   Same block twice, on purpose: the media query covers an unset system
+   preference, the attribute selector covers an explicit toggle choice,
+   and the attribute must win over the media query either direction. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --color-bg: #201e1d;
+    --color-surface: #2d2b2b;
+    --color-text: #f3f2f2;
+    --color-accent: #62c5ee;
+    --color-accent-700: #99e0ff;
+    --color-accent-2: #ff90b1;
+    --color-accent-2-700: #ffc0d0;
+    --color-divider: color-mix(in srgb, #f3f2f2 16%, transparent);
+  }
+}
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --color-bg: #201e1d;
+  --color-surface: #2d2b2b;
+  --color-text: #f3f2f2;
+  --color-accent: #62c5ee;
+  --color-accent-700: #99e0ff;
+  --color-accent-2: #ff90b1;
+  --color-accent-2-700: #ffc0d0;
+  --color-divider: color-mix(in srgb, #f3f2f2 16%, transparent);
+}
+
+.theme-toggle {
+  align-self: center;
+  color: var(--color-text);
+}
+.theme-toggle:hover {
+  color: var(--color-accent);
+}
+
 textarea.input {
   font-family: var(--font-body);
   resize: vertical;

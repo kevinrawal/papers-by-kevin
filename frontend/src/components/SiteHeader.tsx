@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 
+import ThemeToggle from './ThemeToggle'
+
 export type NavKey = 'writing' | 'projects' | 'about' | 'desk'
 
 const LINKS: { key: NavKey; to: string; label: string }[] = [
@@ -34,6 +36,7 @@ export default function SiteHeader({ active, dateline }: Props) {
             </Link>
           ))}
         </nav>
+        <ThemeToggle />
       </div>
       <hr className="rule-heavy" />
       {dateline !== undefined && (
