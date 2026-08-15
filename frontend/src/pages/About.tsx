@@ -45,7 +45,7 @@ export default function About() {
           }}
         >
           <div style={{ flex: '1 1 420px', minWidth: 0 }}>
-            <h1 style={display}>Kevin Rawal</h1>
+            <h1 style={display}>Kevin Raval</h1>
             <p style={standfirst}>
               AI software engineer. I build systems that call models, and then I find out what
               happens at 3am.

@@ -119,7 +119,7 @@ export default function Article() {
             {post.dek}
           </p>
           <p className="kicker kicker--60" style={{ margin: '32px 0 0' }}>
-            {['Kevin Rawal', post.date, post.read ? `${post.read} read` : '']
+            {['Kevin Raval', post.date, post.read ? `${post.read} read` : '']
               .filter(Boolean)
               .join(' · ')}
           </p>

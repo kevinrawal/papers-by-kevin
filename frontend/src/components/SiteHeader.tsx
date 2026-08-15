@@ -21,7 +21,7 @@ export default function SiteHeader({ active, dateline }: Props) {
     <header className="masthead">
       <div className="masthead-row">
         <Link to="/" className="brand">
-          Kevin Rawal
+          Kevin Raval
         </Link>
         <nav className="site-nav">
           {LINKS.map((link) => (

@@ -234,7 +234,7 @@ export default function Home() {
             </a>
           </div>
           <p className="kicker kicker--55" style={{ margin: '56px 0 0' }}>
-            Kevin Rawal — written in the open, corrected in public
+            Kevin Raval — written in the open, corrected in public
           </p>
         </section>
       </div>
